@@ -1,11 +1,27 @@
-<!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+<head>
+	<title><%- title %></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<link rel="stylesheet" type="text/css" href="/stylesheets//main.css">
+</head>
+<body>
+	<header>
+		<a href="./">
+			<img src="<%= avatar %>" class="header-avater" />
+		</a>
+		<a href="./">
+			<h1 class="header-title"><%= title %></h1>
+		</a>
+		<ul class="m-nav">
+			<li><a href="./">首页</a></li>
+		</ul>
+	</header>
+  <div class="layout">
+    	<%- galleryHtml %>
+  </div>
+  <footer class="footer">
+  	<p>Powered by phen-gallery</a></p>
+  </footer>
+	<script src="./main.js"></script>
+</body>
 </html>
