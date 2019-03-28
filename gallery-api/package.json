@@ -11,7 +11,8 @@
     "egg-mysql": "^3.0.0",
     "egg-scripts": "^2.11.0",
     "egg-view-nunjucks": "^2.2.0",
-    "ejs": "^2.6.1"
+    "ejs": "^2.6.1",
+    "node-uuid": "^1.4.8"
   },
   "devDependencies": {
     "autod": "^3.0.1",

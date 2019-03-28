@@ -1,8 +1,6 @@
 /* eslint valid-jsdoc: "off" */
 
 'use strict';
-const path = require('path');
-
 /**
  * @param {Egg.EggAppInfo} appInfo app info
  */
@@ -35,15 +33,6 @@ module.exports = appInfo => {
     },
     app: true,
     agent: false,
-  };
-
-  config.view = {
-    defaultViewEngine: 'nunjucks',
-    defaultExtension: '.nj',
-    root: [
-      path.join(appInfo.baseDir, 'app/view'),
-      path.join(appInfo.baseDir, 'path/to/another'),
-    ].join(','),
   };
 
   return {
