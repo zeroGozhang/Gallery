@@ -42,6 +42,6 @@ var host = 'localhost';
 var port = 3001;// process.env.PORT || 3000
 app.use( express.static(path.join(__dirname, 'public')) );  // 配置静态资源目录
 app.listen(port,host);
-console.log('server started at port ' + host +":"+ port);
+console.log('server started at port ' +"http://" +host +":"+ port);
 
 module.exports = app;
