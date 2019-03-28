@@ -1,0 +1,27 @@
+{
+  "name": "gallery-ui",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "ejs": "^2.5.9",
+    "express": "^4.16.4",
+    "http-errors": "~1.6.2",
+    "morgan": "~1.9.0"
+  },
+  "description": "This is a Gallery UI",
+  "main": "123",
+  "repository": {
+    "type": "git",
+    "url": "gallery"
+  },
+  "keywords": [
+    "gallery"
+  ],
+  "author": "phen",
+  "license": "ISC"
+}
