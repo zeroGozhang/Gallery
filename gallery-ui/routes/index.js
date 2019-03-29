@@ -1,4 +1,5 @@
-var express = require('express');
+var express = require('express'),
+ejs = require('ejs');
 var router = express.Router();
 
 /* GET home page. */
@@ -33,7 +34,30 @@ router.get('/', function(req, res, next) {
       }
     }
   }
-  res.render('index', mockData);
+  var common;
+
+  if (!mockData){
+    throw new Error('No config specified');
+  }
+  
+  if (!mockData.staticFiles || !mockData.urlRoot){
+    throw new Error('Both staticFiles and urlRoot must be specified');
+  }
+  var config = mockData;
+  var common = require('../core/common')(config), 
+  middleware;
+
+  mockData.staticFiles = common.friendlyPath(mockData.staticFiles);
+  mockData.urlRoot = common.friendlyPath(mockData.urlRoot);
+  
+  middleware = require('../core/middleware')(mockData);
+  console.log(middleware)
+  return middleware;
+
+  // console.log('>>>>>>>>>>>>')
+  // var html = ejs.render('index', mockData);
+  // console.log(html);
+  // res.render('index', mockData);
 });
 
 module.exports = router;
