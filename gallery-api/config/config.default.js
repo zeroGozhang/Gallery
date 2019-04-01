@@ -25,11 +25,16 @@ module.exports = appInfo => {
   // mysql config
   config.mysql = {
     client: {
-      host: '172.17.250.112',
+      // host: '172.17.250.112',
+      // port: '3306',
+      // user: 'ad_admin',
+      // password: 'jianke@123',
+      // database: 'info_ad',
+      host: '45.62.108.63',
       port: '3306',
-      user: 'ad_admin',
-      password: 'jianke@123',
-      database: 'info_ad',
+      user: 'gallery',
+      password: 'gallery123456',
+      database: 'gallery',
     },
     app: true,
     agent: false,
