@@ -14,12 +14,12 @@ router.get('/', function(req, res, next) {
       bio: "<b>Tony Hawk</b> is the coolest skateboarder around."
   },
   contents:[                                                  
-      {url:"https://img5.jianke.com/mall/jktt/201903/b7de90e39dc44a5ea7773b05de0ee113.jpg",name:"test1"},                                                  
-      {url:"https://img5.jianke.com/mall/jktt/201903/5cc7d1cf83864f46b50c3b720dad45e2.jpg",name:"test2"},                                                  
-      {url:"https://img5.jianke.com/mall/jktt/201903/5bda5516bc3045578c4f67f774d76b99.jpg",name:"test3"}                                                  
+      {url:'/photo?id=1', img:"https://img5.jianke.com/mall/jktt/201903/b7de90e39dc44a5ea7773b05de0ee113.jpg",name:"test1"},                                                  
+      {url:'/photo?id=2', img:"https://img5.jianke.com/mall/jktt/201903/5cc7d1cf83864f46b50c3b720dad45e2.jpg",name:"test2"},                                                  
+      {url:'/photo?id=3', img:"https://img5.jianke.com/mall/jktt/201903/5bda5516bc3045578c4f67f774d76b99.jpg",name:"test3"}                                                  
   ],
-    galleryHtml : 'bundle',
-    title: 'Gallery',
+    galleryHtml : '<% include gallery %>',
+    title: 'gallery',
     staticFiles : 'public/images',
     urlRoot : '/',
     render : false,
@@ -68,8 +68,9 @@ router.get('/', function(req, res, next) {
   // return middleware;
 
   // console.log('>>>>>>>>>>>>')
-  // var html = ejs.render('index', mockData);
-  // console.log(html);
+  // var html = ejs.render('index', mockData,function(req,res,next){
+  //   console.log(req);
+  // });
   res.render('index', mockData);
 });
 

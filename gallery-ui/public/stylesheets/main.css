@@ -181,8 +181,8 @@
   .thumb img {
     overflow: hidden;
     margin: auto;
-    height: auto;
-    width: auto;
+    height: 123;
+    width: 123;
   }
   .img-wrap {
     width: 300px;
@@ -259,9 +259,9 @@
       padding: 0;
       background: none;
     }
-    .photos .thumb img[data-not-lz] {
+    /* .photos .thumb img[data-not-lz] {
       margin-top: 42%;
-    }
+    } */
     .photos figcaption {
       display: none;
     }

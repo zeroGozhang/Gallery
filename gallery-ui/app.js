@@ -6,6 +6,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var photoRouter = require('./routes/photo');
 
 var app = express();
 
@@ -22,6 +23,7 @@ app.use(express.static(path.join(__dirname, 'public')));// 配置静态资源目
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/photo', photoRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
