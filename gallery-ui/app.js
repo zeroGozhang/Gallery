@@ -20,10 +20,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));// 配置静态资源目录
 
-app.use('/', indexRouter, function(req, res, next){
-  console.log(req);
-  return res.render('index', config);
-});
+app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler

@@ -6,7 +6,19 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   // Mock数据
   const mockData = {
-    galleryHtml : req.html,
+    user:
+    {
+      name: "Tony Hawk",
+      birthyear: 1968,
+      career: "skateboarding",
+      bio: "<b>Tony Hawk</b> is the coolest skateboarder around."
+  },
+  contents:[                                                  
+      {url:"https://img5.jianke.com/mall/jktt/201903/b7de90e39dc44a5ea7773b05de0ee113.jpg",name:"test1"},                                                  
+      {url:"https://img5.jianke.com/mall/jktt/201903/5cc7d1cf83864f46b50c3b720dad45e2.jpg",name:"test2"},                                                  
+      {url:"https://img5.jianke.com/mall/jktt/201903/5bda5516bc3045578c4f67f774d76b99.jpg",name:"test3"}                                                  
+  ],
+    galleryHtml : 'bundle',
     title: 'Gallery',
     staticFiles : 'public/images',
     urlRoot : '/',
@@ -34,6 +46,7 @@ router.get('/', function(req, res, next) {
       }
     }
   }
+  // console.log(mockData.comments.length)
   var common;
 
   if (!mockData){
@@ -50,14 +63,14 @@ router.get('/', function(req, res, next) {
   mockData.staticFiles = common.friendlyPath(mockData.staticFiles);
   mockData.urlRoot = common.friendlyPath(mockData.urlRoot);
   
-  middleware = require('../core/middleware')(mockData);
-  console.log(middleware)
-  return middleware;
+  // middleware = require('../core/middleware')(mockData);
+  // console.log(middleware)
+  // return middleware;
 
   // console.log('>>>>>>>>>>>>')
   // var html = ejs.render('index', mockData);
   // console.log(html);
-  // res.render('index', mockData);
+  res.render('index', mockData);
 });
 
 module.exports = router;
