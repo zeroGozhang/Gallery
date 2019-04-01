@@ -30,7 +30,7 @@
                   <a class="img-wrap js-img-wrap" href="<%= photo.src %>" itemprop="contentUrl" data-size="<%= photo.size %>" data-curr-size="<%= photo.size %>">
                     <img class="js-image" data-not-lz="true" alt="<%= photo.name %>" src="<%= photo.src %>" src="./img/preloader.gif" itemprop="thumbnail"/>
                   </a>
-                  <figcaption itemprop="caption description"><%= photo.name %></figcaption>
+                  <figcaption itemprop="caption description"><input type="checkbox"></figcaption>
                   <div style="display:none">
                     <% if (photo.exif) {%>
                       <div class="pswp__download_original js-download">
