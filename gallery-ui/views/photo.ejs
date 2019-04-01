@@ -13,7 +13,8 @@
 			<h1 class="header-title"><%= title %></h1>
 		</a>
 		<ul class="m-nav">
-			<li><a href="./">首页</a></li>
+            <li><a href="javascript:void(0)" onclick="manager()">批量管理></a></li>
+            <li><a href="javascript:void(0)" onclick="selectAll()">全选</a></li>
 		</ul>
   </header>
   <div class="layout">
@@ -27,10 +28,11 @@
         <div class="photos" itemscope itemtype="http://schema.org/ImageGallery">
           <% photos.forEach(function(photo){ %>
               <figure class="thumb js-thumb js-photos-thumb" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-                  <a class="img-wrap js-img-wrap" href="<%= photo.src %>" itemprop="contentUrl" data-size="<%= photo.size %>" data-curr-size="<%= photo.size %>">
+                  <a class="img-wrap js-img-wrap"  itemprop="contentUrl" data-size="<%= photo.size %>" data-curr-size="<%= photo.size %>">
                     <img class="js-image" data-not-lz="true" alt="<%= photo.name %>" src="<%= photo.src %>" src="./img/preloader.gif" itemprop="thumbnail"/>
                   </a>
-                  <figcaption itemprop="caption description"><input type="checkbox"></figcaption>
+                  <figcaption name="showing" itemprop="caption description"><input name="ck_check" type="checkbox"></figcaption>
+                  <a href="<%= photo.src %>" download="<%= photo.name %>">Download Image</a>
                   <div style="display:none">
                     <% if (photo.exif) {%>
                       <div class="pswp__download_original js-download">
@@ -50,5 +52,21 @@
   <footer class="footer">
   	<p>Powered by phen-gallery</a></p>
   </footer>
+  <script>
+      var manager = function(){
+        var $ck =  document.getElementsByName('showing');
+        $ck.forEach(Element=>{
+            Element.style.display='inline'
+        })
+      }
+
+      var selectAll = function(){
+        var $sa =  document.getElementsByName('ck_check');
+        $sa.forEach(element=>{
+            element.checked=true;
+        })
+      }
+      
+  </script>
 </body>
 </html>
