@@ -62,15 +62,6 @@ router.get('/', function(req, res, next) {
 
   mockData.staticFiles = common.friendlyPath(mockData.staticFiles);
   mockData.urlRoot = common.friendlyPath(mockData.urlRoot);
-  
-  // middleware = require('../core/middleware')(mockData);
-  // console.log(middleware)
-  // return middleware;
-
-  // console.log('>>>>>>>>>>>>')
-  // var html = ejs.render('index', mockData,function(req,res,next){
-  //   console.log(req);
-  // });
   res.render('index', mockData);
 });
 
