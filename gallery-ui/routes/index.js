@@ -1,4 +1,5 @@
 var express = require('express'),
+  request = require('request'),
 ejs = require('ejs');
 var router = express.Router();
 
@@ -13,11 +14,11 @@ router.get('/', function(req, res, next) {
       career: "skateboarding",
       bio: "<b>Tony Hawk</b> is the coolest skateboarder around."
   },
-  contents:[                                                  
-      {url:'/photo?id=1', img:"https://img5.jianke.com/mall/jktt/201903/b7de90e39dc44a5ea7773b05de0ee113.jpg",name:"test1"},                                                  
-      {url:'/photo?id=2', img:"https://img5.jianke.com/mall/jktt/201903/5cc7d1cf83864f46b50c3b720dad45e2.jpg",name:"test2"},                                                  
-      {url:'/photo?id=3', img:"https://img5.jianke.com/mall/jktt/201903/5bda5516bc3045578c4f67f774d76b99.jpg",name:"test3"}                                                  
-  ],
+  // contents:[                                                  
+  //     {url:'/photo?id=1', img:"https://img5.jianke.com/mall/jktt/201903/b7de90e39dc44a5ea7773b05de0ee113.jpg",name:"test1"},                                                  
+  //     {url:'/photo?id=2', img:"https://img5.jianke.com/mall/jktt/201903/5cc7d1cf83864f46b50c3b720dad45e2.jpg",name:"test2"},                                                  
+  //     {url:'/photo?id=3', img:"https://img5.jianke.com/mall/jktt/201903/5bda5516bc3045578c4f67f774d76b99.jpg",name:"test3"}                                                  
+  // ],
     galleryHtml : '<% include gallery %>',
     title: 'gallery',
     staticFiles : 'public/images',
@@ -62,7 +63,23 @@ router.get('/', function(req, res, next) {
 
   mockData.staticFiles = common.friendlyPath(mockData.staticFiles);
   mockData.urlRoot = common.friendlyPath(mockData.urlRoot);
-  res.render('index', mockData);
+  request('http://127.0.0.1:7001/m/gallery', function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+      const galleryRows = JSON.parse(body);
+      const contents = [];
+      galleryRows.data.list.forEach(element => {
+        contents.push({
+          url:`/photo?id=${element.id}`,
+          img:element.cover,
+          name:element.name
+        })
+      });
+      mockData.contents= contents;
+      console.log(contents);
+      return res.render('index', mockData);
+    }
+      
+  })
 });
 
 module.exports = router;
