@@ -7,9 +7,12 @@
     "declarations": true
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "egg": "^2.15.1",
+    "egg-cors": "^2.2.0",
     "egg-mysql": "^3.0.0",
     "egg-scripts": "^2.11.0",
+    "egg-validate": "^2.0.2",
     "egg-view-nunjucks": "^2.2.0",
     "ejs": "^2.6.1",
     "node-uuid": "^1.4.8"
@@ -28,7 +31,7 @@
     "node": ">=8.9.0"
   },
   "scripts": {
-    "start": "egg-scripts start --daemon --title=egg-server-gallery",
+    "start": "egg-scripts start --daemon --title=egg-server-gallery --ignore-stderr --workers=3",
     "stop": "egg-scripts stop --title=egg-server-gallery",
     "dev": "egg-bin dev",
     "debug": "egg-bin debug",
