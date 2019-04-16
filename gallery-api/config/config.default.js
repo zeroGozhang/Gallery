@@ -13,9 +13,11 @@ module.exports = appInfo => {
 
   // use for cookie sign key, should change to your own and keep security
   config.keys = appInfo.name + '_123';
-
+  config.gzip = {
+    threshold: 1024, // 小于 1k 的响应体不压缩
+  };
   // add your middleware config here
-  config.middleware = [];
+  config.middleware = [ 'errorHandler', 'gzip' ];
   config.error = {
     400: { code: 400, message: 'Invalid Param', detail: '' },
     401: { code: 401, message: 'Unauthorized', detail: '' },
