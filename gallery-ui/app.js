@@ -7,7 +7,7 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var photoRouter = require('./routes/photo');
-
+var host = process.env.OPENSHIFT_NODEJS_IP;
 var app = express();
 
 var config = require('./config');
@@ -40,9 +40,9 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-var host = 'localhost';
+// var host = 'localhost';
 var port = 3001;// process.env.PORT || 3000
 app.listen(port,host);
-console.log('server started at port ' +"http://" +host +":"+ port);
+console.log('server started at port ' +"http://" +'localhost' +":"+ port);
 
 module.exports = app;

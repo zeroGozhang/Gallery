@@ -33,9 +33,9 @@ router.get('/', function(req, res, next) {
     cdnDomain: '/',
     avatar: '/images/avatar.png',
   }
-  console.log(`http://127.0.0.1:7001/m/gallery/${req.query.id}/photoList`)
+  console.log(`http://45.62.108.63:7001/m/gallery/${req.query.id}/photoList`)
 
-  request(`http://127.0.0.1:7001/m/gallery/${req.query.id}/photoList`, function (error, response, body) {
+  request(`http://45.62.108.63:7001/m/gallery/${req.query.id}/photoList`, function (error, response, body) {
     console.log(body);
   if (!error && response.statusCode == 200) {  
     console.log(JSON.parse(body));

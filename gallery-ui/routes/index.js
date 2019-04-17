@@ -63,7 +63,7 @@ router.get('/', function(req, res, next) {
 
   mockData.staticFiles = common.friendlyPath(mockData.staticFiles);
   mockData.urlRoot = common.friendlyPath(mockData.urlRoot);
-  request('http://127.0.0.1:7001/m/gallery', function (error, response, body) {
+  request('http://45.62.108.63:7001/m/gallery', function (error, response, body) {
     if (!error && response.statusCode == 200) {
       const galleryRows = JSON.parse(body);
       const contents = [];

@@ -10,7 +10,7 @@ class GalleryService extends Service {
       this.app.mysql.count('gallery', { disabled: 1 }),
       this.app.mysql.select('gallery', {
         where: { disabled: 1 },
-        columns: [ 'id', 'name', 'description', 'cover', 'password' ],
+        columns: [ 'id', 'name', 'description', 'cover', 'password', 'created_date' ],
         orders: [[ 'created_date', 'desc' ]],
         limit: size,
         offset: (page - 1) * size,
