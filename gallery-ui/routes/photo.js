@@ -43,7 +43,7 @@ router.get('/', function(req, res, next) {
     const photos = [];
     photoRows.result.list.forEach(element => {
       photos.push({
-        size: 20,
+        size: '1280x1276',
         src:element.url,
         name:element.name,
       })

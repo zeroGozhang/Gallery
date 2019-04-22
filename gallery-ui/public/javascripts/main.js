@@ -62,6 +62,7 @@
 		init: function() {
 			var $img = document.getElementsByClassName('js-image');
 			for (var i = 0, len = $img.length; i < len; i++) {
+				// console.log(document.getElementsByTagName('body'[0]))
 				lazyload({
 					container: document.getElementsByTagName('body')[0],
 					$target: $img[i],
@@ -378,8 +379,7 @@
 
 	      linkEl = figureEl.children[0]; // <a> element
 
-	      size = linkEl.getAttribute('data-size').split('x');
-
+				size = linkEl.getAttribute('data-size').split('x');
 	      // create slide object
 	      item = {
 	        src: linkEl.getAttribute('href'),
@@ -540,7 +540,18 @@
 	    if (disableAnimation) {
 	      options.showAnimationDuration = 0;
 	    }
-
+			 var  items1 = [
+        {
+            src: 'https://farm2.staticflickr.com/1043/5186867718_06b2e9e551_b.jpg',
+            w: 964,
+            h: 1024
+        },
+        {
+            src: 'https://farm7.staticflickr.com/6175/6176698785_7dee72237e_b.jpg',
+            w: 1024,
+            h: 683
+        }
+		];
 	    // Pass data to PhotoSwipe and initialize it
 	    gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, options);
 	    gallery.init();
@@ -1134,11 +1145,11 @@
 				},
 
 				_equalizePoints = function (p1, p2) {
-					p1.x = p2.x;
-					p1.y = p2.y;
-					if (p2.id) {
-						p1.id = p2.id;
-					}
+					p1.x = 0 ;// p2.x;
+					p1.y = 299; //p2.y;
+					// if (p2.id) {
+					// 	p1.id = p2.id;
+					// }
 				},
 				_roundPoint = function (p) {
 					p.x = Math.round(p.x);
@@ -1922,7 +1933,6 @@
 					//_currZoomLevel = 0.29296875;
 					// _panOffset.x = _calculatePanOffset('x', _currZoomLevel);
 					// _panOffset.y = _calculatePanOffset('y', _currZoomLevel);
-					// console.log(_currZoomLevel, _panOffset);
 					if (centerPoint) {
 						_startZoomLevel = _currZoomLevel;
 						_midZoomPoint.x = Math.abs(centerPoint.x) - _panOffset.x;
@@ -1946,7 +1956,6 @@
 
 					var onUpdate = function (now) {
 						if (now === 1) {
-							// console.log('from', destZoomLevel, initialZoomLevel)
 							_currZoomLevel = destZoomLevel;
 							_panOffset.x = destPanOffset.x;
 							_panOffset.y = destPanOffset.y;
