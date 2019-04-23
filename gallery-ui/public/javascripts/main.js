@@ -62,7 +62,6 @@
 		init: function() {
 			var $img = document.getElementsByClassName('js-image');
 			for (var i = 0, len = $img.length; i < len; i++) {
-				// console.log(document.getElementsByTagName('body'[0]))
 				lazyload({
 					container: document.getElementsByTagName('body')[0],
 					$target: $img[i],
@@ -116,6 +115,7 @@
 		} catch (err) {
 		}
 	}
+	// 页面加载时初始化的函数
 	window.onload = function() {
 		var curType = window.neworientation.init;
 		resizeHandle(curType);
@@ -387,8 +387,6 @@
 	        h: parseInt(size[1], 10)
 	      };
 
-
-
 	      if (figureEl.children.length > 1) {
 	        // <figcaption> content
 	        item.title = figureEl.children[2].innerHTML;
@@ -399,9 +397,23 @@
 	        item.msrc = linkEl.children[0].getAttribute('src');
 	      }
 
-	      item.el = figureEl; // save link to element for getThumbBoundsFn
+				item.el = figureEl; // save link to element for getThumbBoundsFn
+				// var img =figureEl.children[0].children[0];
+				// var ds = img.getAttribute("data-src");
+				// //创建image对象，用于获取图片宽高
+				// var imgtemp = new Image();
+				// //判断是否存在data-src
+				// if (ds != null && ds.length > 0) {
+				// 	imgtemp.src = ds
+				// } else {
+				// 	imgtemp.src = img.src
+				// }
+				// if (imgtemp.complete) {
+				// 	item.w = imgtemp.width;
+				// 	item.h = imgtemp.height;
+				// }
 	      items.push(item);
-	    }
+			}
 
 	    return items;
 	  };
@@ -411,50 +423,50 @@
 	    return el && (fn(el) ? el : closest(el.parentNode, fn));
 	  };
 
-	  // triggers when user clicks on thumbnail
-	  var onThumbnailsClick = function(e) {
-	    e = e || window.event;
-	    e.preventDefault ? e.preventDefault() : e.returnValue = false;
+	   // triggers when user clicks on thumbnail
+		 var onThumbnailsClick = function(e) {
+			e = e || window.event;
+			e.preventDefault ? e.preventDefault() : e.returnValue = false;
 
-	    var eTarget = e.target || e.srcElement;
+			var eTarget = e.target || e.srcElement;
 
-	    // find root element of slide
-	    var clickedListItem = closest(eTarget, function(el) {
-	      return (el.tagName && el.tagName.toUpperCase() === 'FIGURE');
-	    });
+			// find root element of slide
+			var clickedListItem = closest(eTarget, function(el) {
+					return (el.tagName && el.tagName.toUpperCase() === 'FIGURE');
+			});
 
-	    if (!clickedListItem) {
-	      return;
-	    }
+			if(!clickedListItem) {
+					return;
+			}
 
-	    // find index of clicked item by looping through all child nodes
-	    // alternatively, you may define index via data- attribute
-	    var clickedGallery = clickedListItem.parentNode,
-	      childNodes = clickedListItem.parentNode.childNodes,
-	      numChildNodes = childNodes.length,
-	      nodeIndex = 0,
-	      index;
+			// find index of clicked item by looping through all child nodes
+			// alternatively, you may define index via data- attribute
+			var clickedGallery = clickedListItem.parentNode,
+					childNodes = clickedListItem.parentNode.childNodes,
+					numChildNodes = childNodes.length,
+					nodeIndex = 0,
+					index;
 
-	    for (var i = 0; i < numChildNodes; i++) {
-	      if (childNodes[i].nodeType !== 1) {
-	        continue;
-	      }
+			for (var i = 0; i < numChildNodes; i++) {
+					if(childNodes[i].nodeType !== 1) { 
+							continue; 
+					}
 
-	      if (childNodes[i] === clickedListItem) {
-	        index = nodeIndex;
-	        break;
-	      }
-	      nodeIndex++;
-	    }
+					if(childNodes[i] === clickedListItem) {
+							index = nodeIndex;
+							break;
+					}
+					nodeIndex++;
+			}
 
 
 
-	    if (index >= 0) {
-	      // open PhotoSwipe if valid index found
-	      openPhotoSwipe(index, clickedGallery);
-	    }
-	    return false;
-	  };
+			if(index >= 0) {
+					// open PhotoSwipe if valid index found
+					openPhotoSwipe( index, clickedGallery );
+			}
+			return false;
+	};
 
 	  // parse picture index and gallery index from URL (#&pid=1&gid=2)
 	  var photoswipeParseHash = function() {
@@ -511,8 +523,7 @@
 	        };
 	      }
 
-	    };
-
+			};
 	    // PhotoSwipe opened from URL
 	    if (fromURL) {
 	      if (options.galleryPIDs) {
@@ -537,21 +548,14 @@
 	      return;
 	    }
 
-	    if (disableAnimation) {
-	      options.showAnimationDuration = 0;
-	    }
-			 var  items1 = [
-        {
-            src: 'https://farm2.staticflickr.com/1043/5186867718_06b2e9e551_b.jpg',
-            w: 964,
-            h: 1024
-        },
-        {
-            src: 'https://farm7.staticflickr.com/6175/6176698785_7dee72237e_b.jpg',
-            w: 1024,
-            h: 683
-        }
-		];
+	    // if (disableAnimation) {
+	    //   options.showAnimationDuration = 0;
+			// }
+
+			console.log('options')
+			console.log(options);
+
+		console.log(items);
 	    // Pass data to PhotoSwipe and initialize it
 	    gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, options);
 	    gallery.init();
@@ -559,7 +563,8 @@
 
 	  // loop through all gallery elements and bind events
 	  var galleryElements = document.querySelectorAll(gallerySelector);
-
+		console.log('galleryElements');
+		console.log(galleryElements);
 	  for (var i = 0, l = galleryElements.length; i < l; i++) {
 	    galleryElements[i].setAttribute('data-pswp-uid', i + 1);
 	    galleryElements[i].onclick = onThumbnailsClick;
@@ -4525,7 +4530,7 @@
 										var curSizeArr = curSize.split('x');
 										pswp.currItem.currZoomLevel = pswp.currItem.w * pswp.currItem.initialZoomLevel / parseInt(curSizeArr[0]);
 										pswp.currItem.w = parseInt(curSizeArr[0]);
-										pswp.currItem.h = parseInt(curSizeArr[1]);
+										pswp.currItem.h = parseInt(curSizeArr[1]);								
 										window.innerWidth;
 
 										$imgWrap[i].setAttribute('data-size', curSize);
