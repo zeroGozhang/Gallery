@@ -12,10 +12,10 @@
 		<a href="./">
 			<h1 class="header-title"><%= title %></h1>
 		</a>
-		<ul class="m-nav">
+		<!-- <ul class="m-nav">
             <li><a href="javascript:void(0)" onclick="manager()">管理</a></li>
             <li><a href="javascript:void(0)" onclick="selectAll()">全选</a></li>
-		</ul>
+		</ul> -->
   </header>
   <div class="layout">
     <% if (photos.length > 0){ %>
@@ -31,10 +31,10 @@
                   <a class="img-wrap js-img-wrap" href="<%= photo.src%>" itemprop="contentUrl" data-size="<%= photo.size %>" data-curr-size="<%= photo.size %>">
                     <img class="js-image" data-not-lz="true" alt="<%= photo.name %>" data-src="<%= photo.src %>" src="/images/preloader.gif" itemprop="thumbnail"/>
                   </a>
-                  <figcaption name="showing" itemprop="caption description">
+                  <!-- <figcaption name="showing" itemprop="caption description">
                      <a  href="#" onclick="downloadIamge('<%= photo.src %>','3d')">下载<i class="far fa-arrow-alt-to-bottom"></i></a>
                      <a  href="<%= photo.src %>">预览<i class="far fa-arrow-alt-to-bottom"></i></a>
-                    </figcaption>
+                    </figcaption> -->
                   <!-- <a  download="<%= photo.name %>">下载<i class="far fa-arrow-alt-to-bottom"></i></a> -->
                   <div style="display:none">
                     <% if (photo.exif) {%>

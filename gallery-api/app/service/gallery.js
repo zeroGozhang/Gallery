@@ -16,10 +16,19 @@ class GalleryService extends Service {
         offset: (page - 1) * size,
       }),
     ]);
+    list.forEach(element => {
+      element.cover = 'http://192.168.180.94:7001' + element.cover;
+
+    });
     return {
       totlaCount,
       list,
     };
+  }
+
+  async show(id) {
+    const rows = await this.app.mysql.get('gallery', { id });
+    return rows;
   }
 
   async photoList(galleryId, page, size) {
@@ -30,6 +39,11 @@ class GalleryService extends Service {
       orders: [[ 'created_date', 'desc' ]],
       limit: size,
       offset: (page - 1) * size,
+    });
+
+    list.forEach(element => {
+      element.url = 'http://192.168.180.94:7001' + element.url;
+
     });
     return {
       totlaCount,

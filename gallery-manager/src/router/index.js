@@ -53,7 +53,7 @@ const routes = [
         path: '/meeting/editForm/:mode',
         name: 'meetingForm',
         component: () => import('@/views/meetingManage/editForm'),
-        meta: { title: '会议详情', keepAlive: true },
+        meta: { title: '相册编辑', keepAlive: true },
       },
       
       {
@@ -63,10 +63,23 @@ const routes = [
         meta: { title: '会议视频列表', keepAlive: true },
       },
       {
+        path: '/meeting/newForm/add',
+        name: 'newGallery',
+        component: () => import('@/views/meetingManage/newGallery'),
+        meta: { title: '新增相册', keepAlive: true },
+      },
+      {
+        path: '/meeting/photos',
+        name: 'photos',
+        component: () => import('@/views/meetingManage/photos'),
+        meta: { title: '相片管理', keepAlive: true },
+      },
+
+      {
         path: '/meetingManage',
         name: 'meetingManage',
         component: () => import('@/views/meetingManage/meetingTable'),
-        meta: { title: '会议管理', keepAlive: true },
+        meta: { title: '相册管理', keepAlive: true },
       },
     ],
   },

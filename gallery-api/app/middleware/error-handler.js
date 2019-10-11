@@ -5,7 +5,8 @@ module.exports = (option, app) => {
     try {
       await next();
     } catch (err) {
-      ctx.helper.printLog(err);
+      // ctx.helper.printLog(err);
+      console.log(err);
       const status = err.status || 500;
       if (status === 500) { // 内部错误
         ctx.body = {

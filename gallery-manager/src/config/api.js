@@ -3,7 +3,7 @@
 window.jkenv = window.jkenv || {
 // window.jkenv = {
   // JLD_API: 'http://jld-api.dev.jianke.com',
-  JLD_API: 'http://127.0.0.1:7225',
+  JLD_API: 'http://127.0.0.1:7001',
   WEBGATEWAY: 'http://web-gateway.dev.jianke.com',
 };
 
@@ -39,6 +39,14 @@ export function meetingManage() {
   };
 }
 
+
+// 相片管理
+export function photoManage() {
+  return {
+
+    list: resolveApi('JLD_API', 'm/gallery/:id/photoList'),
+  };
+}
 
 export function userInfo() {
   return {

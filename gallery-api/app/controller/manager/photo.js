@@ -46,9 +46,39 @@ class PhotoController extends Controller {
     this.returnSuccess(result, 201);
   }
 
+  async destroy() {
+    const id = this.ctx.params.id;
+    await this.app.mysql.update('photos', { disabled: 0 }, { where: { id } });
+    this.returnSuccess('', 200);
+  }
+
   async createPhoto() {
     this.returnSuccess('', 201);
   }
+
+  /**
+   * 上传相册里的图片
+   */
+  async uploadPhotos() {
+    const ctx = this.ctx;
+    // egg-multipart 已经帮我们处理文件二进制对象
+    // node.js操作文件流
+    const stream = await ctx.getFileStream();
+    const id = stream.fields.id;
+    const url = await this.ctx.service.upload.index(stream);
+    await this.app.mysql.insert('photos', {
+      name: stream.filename,
+      galleryId: id,
+      url,
+      created_date: new Date(),
+      disabled: 1,
+    });
+
+    this.returnSuccess({
+      imageUrl: url,
+    }, 200);
+  }
+
 }
 
 module.exports = PhotoController;

@@ -26,7 +26,6 @@
     "enquire.js": "^2.1.6",
     "eslint-plugin-prettier": "^3.0.1",
     "express": "^4.16.4",
-    "jk-ui-env": "^3.0.9",
     "js-cookie": "^2.2.0",
     "moment": "^2.24.0",
     "nprogress": "^0.2.0",

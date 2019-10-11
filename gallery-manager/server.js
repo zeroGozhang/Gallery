@@ -6,7 +6,6 @@ const cors = require('cors');
 const compression = require('compression');
 const favicon = require('serve-favicon');
 const serialize = require('serialize-javascript');
-const { loadsync, } = require('jk-ui-env');
 const { version, description, name, } = require('./package.json');
 const resolve = dir => path.resolve(__dirname, dir);
 const port = process.env.PORT || 8080;
@@ -46,11 +45,9 @@ const devOptions = {
   profiles: ['dev'],
 };
 
-const { env, internal_env: internalEnv, } = loadsync(
-  name,
-  isProd ? {} : devOptions
-);
-env.JLD_API='http://127.0.0.1:7225'
+
+const env ={}
+env.JLD_API='http://127.0.0.1:7001'
 envWithVersion = { version: `jk/${version}`, ...env, };
 process.jkenv = envWithVersion;
 

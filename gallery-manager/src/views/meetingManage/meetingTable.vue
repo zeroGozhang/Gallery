@@ -1,7 +1,7 @@
 <template>
   <a-card class="data-list">
     <div class="operate">
-      <a-button type="dashed" style="width: 100%" @click="handleAdd" icon="plus">新增会议</a-button>
+      <a-button type="dashed" style="width: 100%" @click="handleAdd()" icon="plus">新增相册</a-button>
     </div>
     <a-table
       :loading="loading"
@@ -14,6 +14,8 @@
   
     <span slot="action" slot-scope="text, record">
       <a href="javascript:;" @click="handleEdit(record)">编辑</a>
+      <a-divider type="vertical" />
+      <a href="javascript:;" @click="photoManager(record)">管理</a>
       <a-divider type="vertical" />
         <a-dropdown>
           <a class="ant-dropdown-link">
@@ -57,7 +59,7 @@ const tableHead = [
     align: 'center',
   },
    {
-    title: '开始时间',
+    title: '创建时间',
     dataIndex: 'created_date',
     align: 'center',
     customRender: (text) => {
@@ -95,17 +97,26 @@ export default {
       this.fetchDataList(page);
     },
     handleAdd(){
-      this.$router.push('/meeting/editForm/add');
+      this.$router.push('/meeting/newForm/add');
     },
     handleEdit(val){
      this.$router.push({
-        name: 'meetingForm',
+        name: 'newGallery',
         params: {
         id: val.id,
         mode: 'edit',
         },
       });
     },
+    photoManager(val){
+      this.$router.push({
+        name:'photos',
+        params:{
+          id:val.id
+        }
+      })
+    },
+
     async handleDelete (record) {
       const { status, data } = await deleteMeetingInfo(record.id);
       if (/20\d/.test(status)) {

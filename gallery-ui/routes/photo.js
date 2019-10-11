@@ -16,7 +16,7 @@ router.get('/', function(req, res, next) {
     cdnDomain: '/',
     avatar: '/images/avatar.png',
   }
-  request(`http://45.62.108.63:7001/m/gallery/${req.query.id}/photoList`, function (error, response, body) {
+  request(`http://127.0.0.1:7001/m/gallery/${req.query.id}/photoList`, function (error, response, body) {
   if (!error && response.statusCode == 200) {
     const photoRows = JSON.parse(body);
     const photos = [];

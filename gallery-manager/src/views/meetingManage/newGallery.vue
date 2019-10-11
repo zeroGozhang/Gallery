@@ -15,7 +15,7 @@
     <a-form-item
       :label-col="formItemLayout.labelCol"
       :wrapper-col="formItemLayout.wrapperCol"
-      label="名称"
+      label="描述"
       >
       <a-input
         v-model="meetingInfo.description"  
@@ -23,29 +23,6 @@
         placeholder="请输入相册描述" />
     </a-form-item>
 
-    <a-form-item
-      :label-col="formItemLayout.labelCol"
-      :wrapper-col="formItemLayout.wrapperCol"
-      label="图片"
-      >
-  <div class="clearfix">
-    <a-upload
-      action="//jsonplaceholder.typicode.com/posts/"
-      listType="picture-card"
-      :fileList="fileList"
-      @preview="handlePreview"
-      @change="handleChange"
-    >
-      <div v-if="fileList.length < 3">
-        <a-icon type="plus" />
-        <div class="ant-upload-text">Upload</div>
-      </div>
-    </a-upload>
-    <a-modal :visible="previewVisible" :footer="null" @cancel="handleCancel">
-      <img alt="example" style="width: 100%" :src="previewImage" />
-    </a-modal>
-  </div>
-    </a-form-item>
 
     <a-form-item
       :label-col="formItemLayout.labelCol"
@@ -55,7 +32,7 @@
         name="cover"
         listType="picture-card"
         class="avatar-uploader"
-        action='//web-gateway.tst.jianke.com/uploader/upload'
+        action='//127.0.0.1:7001/upload/image'
         :data = "headers"
         :showUploadList="false"
         :beforeUpload="beforeUpload"
@@ -68,6 +45,7 @@
        </div>
       </a-upload>
     </a-form-item>
+
     <a-form-item
       :label-col="formTailLayout.labelCol"
       :wrapper-col="formTailLayout.wrapperCol">
@@ -77,12 +55,14 @@
         确认
       </a-button>
     </a-form-item>
+    
   </a-form>
   </a-card>
 </template>
 
 <script>
 import  { addMeetingForm, fetchMeetingInfo, editMeetingForm }  from '@/services/meeting';
+
 import moment from 'moment';
 import { request } from 'https';
 
@@ -123,7 +103,7 @@ export default {
       },
       headers: {
     'Content-Type': 'application/json;charset=utf-8',
-    Authorization: `bearer ${JSON.parse(localStorage.getItem('tokenInfo')).token}`,
+    Authorization: ``,
   },
     };
   },
@@ -157,32 +137,19 @@ export default {
       console.log('radio checked', e.target.value)
     },
     handleSelection(data) {
-      const idArr = [];
-      const titleArr = [];
-      const result = data.forEach(item => {
-        idArr.push(item.id);
-        titleArr.push(item.title);
-      });
-      this.tmpSelectedArticlesArr.bindedArticleKeys = [...idArr];
 
     },
-    async setBindedArticles(meetingId) {
-      const params = {
-        page: 1,
-        size: 100,
-        id: meetingId,
-      };
-    
-    },
+
     async getMeetingList(){
       const id = this.$route.params.id;
       const { status, data } = await fetchMeetingInfo(id);
       if (/20\d/.test(status)) {
         this.meetingInfo=data.data;
+        console.log(data.data.cover)
+        this.meetingInfo.imageUrl = data.data.cover
       } else {
         this.$message.error(data.error.detail || '未知异常');
       }
-      this.setBindedArticles(id);
     },
     initPage() {
       this.meetingInfo = {
@@ -191,6 +158,7 @@ export default {
         };
     },
     coverChange (info) {
+
       if (info.file.status === 'uploading') {
         this.loading = true;
         return;
@@ -200,12 +168,15 @@ export default {
           this.imageUrl = imageUrl;
           this.loading = false;
         });
+        console.log(info.file.response.url)
+        this.meetingInfo.imageUrl = info.file.response.url
+       
       }
     },
+
     beforeUpload (file) {
       const formData = new FormData();
       formData.append('files[]',file);
-      console.log(formData);
       const isJPG = file.type === 'image/jpeg' || 'image/png';
       if (!isJPG) {
         this.$message.error('You can only upload JPG OR PNG file!');
@@ -222,14 +193,10 @@ export default {
         success: (data)=>{
           console.log(data);
           this.loading=false;
-          // this.imageUrl = 
           this.$message.success('upload successfully.');
         }
       })
       return isJPG && isLt2M;
-    },
-    bindArticle () {
-      this.visible = true;
     },
 
     finish () {
@@ -240,9 +207,9 @@ export default {
             const params = {
               name: this.meetingInfo.name,
               description: this.meetingInfo.description,
-              cover: 'https://ss2.baidu.com/-vo3dSag_xI4khGko9WTAnF6hhy/image/h%3D300/sign=f888027cebdde711f8d245f697eecef4/71cf3bc79f3df8dcfcea3de8c311728b461028f7.jpg',
+              cover: this.meetingInfo.imageUrl,
             };
-            if(this.$route.params.mode === 'add') {
+            console.log(params)
               const { status, data } = await addMeetingForm(params);
               if (/20\d/.test(status)) {
                 this.$message.success('新增成功');
@@ -250,16 +217,7 @@ export default {
               } else {
                 this.$message.error(data.error.detail || '未知异常');
               }
-            }else if(this.$route.params.mode === 'edit'){
-              const id = this.$route.params.id ;
-              const {status, data } = await editMeetingForm(id, params);
-              if (/20\d/.test(status)) {
-                this.$message.success('修改成功');
-                this.$router.push('/meetingManage');
-              } else {
-                this.$message.error(data.error.detail || '未知异常');
-              }
-            }
+            
           }
         },
       );
