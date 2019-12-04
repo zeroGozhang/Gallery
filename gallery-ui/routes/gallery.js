@@ -7,7 +7,7 @@ router.get('/', function(req, res, next) {
   // Mock数据
   const mockData = {
     galleryHtml : req.html,
-    title: 'Gallery',
+    title: '相册',
     staticFiles : 'public/images',
     urlRoot : '/',
     render : false,

@@ -15,7 +15,7 @@ router.get('/', function(req, res, next) {
       bio: "<b>Tony Hawk</b> is the coolest skateboarder around."
   },
     galleryHtml : '<% include gallery %>',
-    title: 'gallery',
+    title: '相册',
     staticFiles : 'public/images',
     urlRoot : '/',
     render : false,
@@ -58,7 +58,7 @@ router.get('/', function(req, res, next) {
 
   mockData.staticFiles = common.friendlyPath(mockData.staticFiles);
   mockData.urlRoot = common.friendlyPath(mockData.urlRoot);
-  request('http://127.0.0.1:7001/m/gallery', function (error, response, body) {
+  request('http://107.182.180.211:7001/m/gallery', function (error, response, body) {
     if (!error && response.statusCode == 200) {
       const galleryRows = JSON.parse(body);
       const contents = [];

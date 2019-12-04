@@ -9,14 +9,14 @@ router.get('/', function(req, res, next) {
    const mockData = {
     description:'这是一段描述',
     galleryHtml : 'gallery',
-    title: 'gallery',
+    title: '相册',
     staticFiles : 'public/images',
     urlRoot : '/',
     render : false,
     cdnDomain: '/',
     avatar: '/images/avatar.png',
   }
-  request(`http://127.0.0.1:7001/m/gallery/${req.query.id}/photoList`, function (error, response, body) {
+  request(`http://107.182.180.211:7001/m/gallery/${req.query.id}/photoList`, function (error, response, body) {
   if (!error && response.statusCode == 200) {
     const photoRows = JSON.parse(body);
     const photos = [];
@@ -27,6 +27,7 @@ router.get('/', function(req, res, next) {
         name:element.name,
       })
     });
+    mockData.description = photoRows.result.desc
     mockData.photos=photos;
     res.render('photo', mockData);
     // console.log(body) // Show the HTML for the baidu homepage.

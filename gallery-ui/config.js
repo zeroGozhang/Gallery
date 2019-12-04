@@ -1,5 +1,5 @@
 module.exports = {
-    title: 'Gallery',
+    title: '相册',
     staticFiles : 'public/images',
     urlRoot : '/',
     render : false,
