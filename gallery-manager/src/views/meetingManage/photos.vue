@@ -1,7 +1,7 @@
 <template>
   <div class="clearfix">
     <a-upload
-      action="//127.0.0.1:7001/upload/photos"
+      action="//107.182.180.211:7001/upload/photos"
       :data = "headers"
       listType="picture-card"
       :fileList="fileList"

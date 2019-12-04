@@ -8,7 +8,7 @@ const favicon = require('serve-favicon');
 const serialize = require('serialize-javascript');
 const { version, description, name, } = require('./package.json');
 const resolve = dir => path.resolve(__dirname, dir);
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 8083;
 
 const app = express();
 
@@ -47,7 +47,7 @@ const devOptions = {
 
 
 const env ={}
-env.JLD_API='http://127.0.0.1:7001'
+env.JLD_API='http://107.182.180.211:7001'
 envWithVersion = { version: `jk/${version}`, ...env, };
 process.jkenv = envWithVersion;
 

@@ -3,14 +3,14 @@
 window.jkenv = window.jkenv || {
 // window.jkenv = {
   // JLD_API: 'http://jld-api.dev.jianke.com',
-  JLD_API: 'http://127.0.0.1:7001',
+  JLD_API: 'http://107.182.180.211:7001',
   WEBGATEWAY: 'http://web-gateway.dev.jianke.com',
 };
 
 function resolveApi(configName, path = '') {
-  window.jkenv['JLD_API'] = 'http://127.0.0.1:7001';
+  window.jkenv['JLD_API'] = 'http://107.182.180.211:7001';
   // console.log(process.env.VUE_ENV)
-  // process.jkenv['JLD_API'] = 'http://127.0.0.1:7225';
+  // process.jkenv['JLD_API'] = 'http://107.182.180.211:7225';
   if (process.env.VUE_ENV === 'server') {
     return `${process.jkenv[configName]}/${path}`;
   }

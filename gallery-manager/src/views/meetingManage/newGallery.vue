@@ -32,7 +32,7 @@
         name="cover"
         listType="picture-card"
         class="avatar-uploader"
-        action='//127.0.0.1:7001/upload/image'
+        action='//107.182.180.211:7001/upload/image'
         :data = "headers"
         :showUploadList="false"
         :beforeUpload="beforeUpload"
