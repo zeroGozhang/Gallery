@@ -22,7 +22,7 @@
     "memory-cache": "^0.2.0",
     "morgan": "~1.9.0",
     "underscore": "*",
-    "webpack": "^4.30.0"
+    "webpack": "^5.75.0"
   },
   "description": "This is a Gallery UI",
   "main": "123",
@@ -36,6 +36,6 @@
   "author": "phen",
   "license": "ISC",
   "devDependencies": {
-    "webpack-cli": "^3.3.0"
+    "webpack-cli": "^5.0.1"
   }
 }
